@@ -27,4 +27,4 @@ export const TODOLIST2 = [
     },
     { tevekenyseg: "kész dokumentáció", hatarido: "2024.04.15" }
 ];
-export const TODOLIST3 = []
+export const KOCSIK = []

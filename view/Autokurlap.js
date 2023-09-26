@@ -12,16 +12,44 @@ class KocsisUrlap {
     setSubmitHandler(callback) {
         this.submitelem.on("click", (event) => {
             event.preventDefault();
-            this.#adatGyujt();
-            callback(this.#adat); 
+            if (this.validateInputs()) {
+                this.#adatGyujt();
+                callback(this.#adat); 
+            }
         });
+    }
+
+    validateInputs() {
+        const tipusValue = $(`#tipus`).val();
+        const evjaratValue = $(`#evjarat`).val();
+        const letterRegex = /^[A-Z][a-z]*$/;
+        const numberRegex = /^[0-9]+$/;
+
+        if (!letterRegex.test(tipusValue)) {
+            alert("A tipusnak nagybetűvel kell kezdődnie és csak betűt tartalmazhat.");
+            return false;
+        }
+
+        if (!numberRegex.test(evjaratValue)) {
+            alert("Az évjáratban csak szám szerepelhet");
+            return false;
+        }
+
+        return true;
     }
 
     #urlapLetrehozasa() {
         let txt = "";
         for (const key in this.#adat) {
-            txt += `<div class="form-group">
-                <label for="${key}">${this.#adat[key]}</label>
+            txt += `<div class="form-group">`;
+            
+            if (key === "tipus") {
+                txt += `<p>Tipusa</p>`;
+            }else{
+                txt += `<p>Évjárat</p>`;
+            }
+            
+            txt += `<label for="${key}">${this.#adat[key]}</label>
                 <input type="text" class="form-control" id="${key}" name="${key}" value="${this.#adat[key]}">
             </div>`;
         }

@@ -1,8 +1,8 @@
-import { TODOLIST3 } from "../adatok.js";
+import { KOCSIK } from "../adatok.js";
 class Model {
     #list = []
     constructor(list){
-        this.#list = TODOLIST3;
+        this.#list = KOCSIK;
 
     }
     ujAdat(obj){
